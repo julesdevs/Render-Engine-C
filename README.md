@@ -1,4 +1,4 @@
-# Render-Engine-C ⚙️
+# Render-Engine-C 
 
 > A high-performance, dependency-free image processing engine built from scratch in pure C.
 
