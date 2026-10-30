@@ -1,14 +1,18 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Iinclude
+CFLAGS = -Wall -Wextra -Wpedantic -O3 -march=native -flto -I./include
+SRC = src/main.c src/image.c
+OBJ = $(SRC:.c=.o)
+EXEC = Render-Engine-C
 
-SRCS = src/main.c
-OBJS = $(SRCS:.c=.o)
-TARGET = render-engine
+all: $(EXEC)
 
-all: $(TARGET)
+$(EXEC): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJ) $(EXEC)
+
+.PHONY: all clean
